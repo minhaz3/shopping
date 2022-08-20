@@ -1,52 +1,56 @@
-// increase and decrease by pressing plus and minus button 
-function updatePhoneNumber(inOrDecrease) {
-    const inputField = document.getElementById('phone-num-input');
-    const inputFieldString = inputField.value;
-    const inputFieldNumber = parseInt(inputFieldString);
-
-    let newPhoneNumber;
-    if (inOrDecrease) {
-        newPhoneNumber = inputFieldNumber + 1;
+// Increase and Decrease by pressing button
+function phoneNumber(anything) {
+    const getPreviousPhoneInputField = document.getElementById("phone-num-input");
+    const getPreviousPhoneInputString = getPreviousPhoneInputField.value;
+    const getPreviousPhoneInputNumber = parseInt(getPreviousPhoneInputString);
+    let totalPhoneNumber;
+    if (anything === true) {
+        totalPhoneNumber = getPreviousPhoneInputNumber + 1;
     }
     else {
-        if (inputFieldNumber > 1) {
-            newPhoneNumber = inputFieldNumber - 1;
+        // the phone number can not be less than 1
+        if (getPreviousPhoneInputNumber > 0) {
+            totalPhoneNumber = getPreviousPhoneInputNumber - 1;
         }
         else {
             return;
         }
     }
-    inputField.value = newPhoneNumber;
-    return newPhoneNumber;
+
+    getPreviousPhoneInputField.value = totalPhoneNumber;
+    return totalPhoneNumber;
 }
 
-// calculate phonePrice
-function phonePrice(newPhoneNumber) {
-    const getAPhonePrice = document.getElementById('phone-total-bal');
-    if (newPhoneNumber >= 1) {
-        const calculatePhonePrice = newPhoneNumber * 1219;
-        getAPhonePrice.innerText = calculatePhonePrice;
-        return calculatePhonePrice;
-    }
-    else {
-        return;
+// function for calculate case priceses
+function phonePrice(number) {
+    const phonePrice = document.getElementById('phone-total-bal');
+    if (number >= 0) {
+        const phonePriceTotal = number * 1219;
+        phonePrice.innerText = phonePriceTotal;
     }
 }
 
 
-
-// plus button
+// call the plus button by addeventlistener
 document.getElementById('phone-plus-btn').addEventListener('click', function () {
-    const newPhoneNumber = updatePhoneNumber(true);
-    phonePrice(newPhoneNumber);
-    calculateSubTotal();
+    // calling fot plus button
+    const getphone = phoneNumber(true);
+
+    // calculate phone price by increaseing
+    phonePrice(getphone);
+
+    // calculateAllPrices by a function which is in common.js file
+    calculateAllPrices();
 })
 
-// minus button
+// call the minus button by addEventListener
 document.getElementById('phone-minus-btn').addEventListener('click', function () {
-    const newPhoneNumber = updatePhoneNumber(false);
-    phonePrice(newPhoneNumber);
-    calculateSubTotal();
+    // calling for minus button
+    const getphone = phoneNumber(false);
+
+    // calculate phone price by decreaseing
+    phonePrice(getphone);
+
+    // calculateAllPrices by a function which is in common.js file
+    calculateAllPrices();
 })
-
-

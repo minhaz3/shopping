@@ -1,58 +1,60 @@
-// increase and decrease by pressing plus and minus button 
-function updateCaseNumber(inOrDecrease) {
-    const inputField = document.getElementById('case-num-input');
-    const inputFieldString = inputField.value;
-    const inputFieldNumber = parseInt(inputFieldString);
-
-    let newCaseNumber;
-    if (inOrDecrease) {
-        newCaseNumber = inputFieldNumber + 1;
+function caseNumber(anything) {
+    const getPreviousCaseInputField = document.getElementById("case-num-input");
+    const getPreviousCaseInputString = getPreviousCaseInputField.value;
+    const getPreviousCaseInputNumber = parseInt(getPreviousCaseInputString);
+    let totalCaseNumber;
+    if (anything === true) {
+        totalCaseNumber = getPreviousCaseInputNumber + 1;
     }
     else {
-        if (inputFieldNumber > 1) {
-            newCaseNumber = inputFieldNumber - 1;
+
+        if (getPreviousCaseInputNumber > 0) {
+            totalCaseNumber = getPreviousCaseInputNumber - 1;
         }
         else {
-
             return;
         }
     }
-    inputField.value = newCaseNumber;
-    return newCaseNumber;
+    getPreviousCaseInputField.value = totalCaseNumber;
+    return totalCaseNumber;
 }
 
-// calculate phonePrice
-function casePrice(newCaseNumber) {
-    const getACasePrice = document.getElementById('case-total-bal');
-    if (newCaseNumber >= 1) {
-        const calculatePhonePrice = newCaseNumber * 59;
-        getACasePrice.innerText = calculatePhonePrice;
+// function for calculate case priceses
+function casePrice(number) {
+    const getCasePriceInput = document.getElementById("case-total-bal");
+    if (number >= 0) {
+        const casePriceTotal = number * 59;
+        getCasePriceInput.innerText = casePriceTotal;
     }
     else {
         return;
     }
+
 }
 
 
 
 
+// call the plus button by addeventlistener
+document.getElementById("case-plus-btn").addEventListener('click', function () {
+    // calling fot plus button
+    const getcase = caseNumber(true);
 
+    // calculate case price by increaseing
+    casePrice(getcase);
 
-
-
-
-// plus button
-document.getElementById('case-plus-btn').addEventListener('click', function () {
-    const newCaseNumber = updateCaseNumber(true);
-    casePrice(newCaseNumber);
-    calculateSubTotal();
-
+    // calculateAllPrices by a function which is in common.js file
+    calculateAllPrices();
 })
 
-// minus button
-document.getElementById('case-minus-btn').addEventListener('click', function () {
-    const newCaseNumber = updateCaseNumber(false);
-    casePrice(newCaseNumber);
-    calculateSubTotal();
+// call the minus button by addEventListener
+document.getElementById("case-minus-btn").addEventListener('click', function () {
+    // calling for minus button
+    const getcase = caseNumber(false);
 
+    // calculate case price by decreaseing
+    casePrice(getcase);
+
+    // calculateAllPrices by a function which is in common.js file
+    calculateAllPrices();
 })
